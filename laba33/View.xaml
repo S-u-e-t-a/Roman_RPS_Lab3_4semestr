@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    Title="MainWindow"
+    Title="Лабораторная работа №3"
     Width="800"
     Height="400"
     ResizeMode="CanMinimize"
