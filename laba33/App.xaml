@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:laba3"
              StartupUri="View.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

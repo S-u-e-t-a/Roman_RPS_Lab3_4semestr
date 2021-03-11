@@ -4,27 +4,29 @@ using OxyPlot.Series;
 
 namespace laba3
 {
+    /// <summary>
+    /// Класс с данными для графика
+    /// </summary>
     internal class LiveData
     {
-        
         public readonly double A;
         public readonly FunctionSeries Series;
         public readonly double Step;
         public readonly double X0;
         public readonly double X1;
-        
+
         public LiveData(double a, double x0, double x1, double step)
         {
             if (x0 >= x1) throw new Exception();
-            this.A = a;
-            this.X0 = x0;
-            this.X1 = x1;
-            this.Step = step;
+            A = a;
+            X0 = x0;
+            X1 = x1;
+            Step = step;
             Series = Model.GetFunctionSeries(a, x0, x1, step);
         }
 
         /// <summary>
-        /// Экспортирование данных в таблицу Excel
+        ///     Экспортирование данных в таблицу Excel
         /// </summary>
         public void ExportToExcel()
         {

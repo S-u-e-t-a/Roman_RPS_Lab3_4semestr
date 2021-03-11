@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="Справка" Height="170" Width="500" ResizeMode="NoResize">
     <Grid>
-        <TextBlock  TextWrapping="Wrap" Margin="0,0,116,0">
-            Лабораторная работа №3 <LineBreak/>
-            Автор: Хлебников Роман <LineBreak/>
-            *Данная программа использует технологию WPF и реализует возможность отрисовки заданного графика. <LineBreak/>
+        <TextBlock TextWrapping="Wrap" Margin="0,0,116,0">
+            Лабораторная работа №3 <LineBreak />
+            Автор: Хлебников Роман <LineBreak />
+            *Данная программа использует технологию WPF и реализует возможность отрисовки заданного графика.
+            <LineBreak />
             *Предусмотрена возможность экспорта данных о графике в Excel таблицу.
         </TextBlock>
     </Grid>

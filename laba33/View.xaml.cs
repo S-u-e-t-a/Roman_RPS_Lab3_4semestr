@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Win32;
 using OxyPlot;
+using OxyPlot.Axes;
 
 namespace laba3
 {
@@ -10,28 +12,27 @@ namespace laba3
         private LiveData _currentData;
 
         /// <summary>
-        /// Инициализация формы
+        ///     Инициализация формы
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             var myModel = new PlotModel();
-            this.Plot.Model = myModel;
+            Plot.Model = myModel;
         }
 
         /// <summary>
-        /// Функция отрисовки графика
+        ///     Функция отрисовки графика
         /// </summary>
         private void DrawGraph(object sender, RoutedEventArgs e)
         {
             try
             {
-
-                double a = Double.Parse(inputA.Text);
-                double x0 = Double.Parse(inputX0.Text);
-                double x1 = Double.Parse(inputX1.Text);
-                double step = Double.Parse(inputStep.Text);
-                if (step<=0)
+                var a = double.Parse(inputA.Text);
+                var x0 = double.Parse(inputX0.Text);
+                var x1 = double.Parse(inputX1.Text);
+                var step = double.Parse(inputStep.Text);
+                if (step <= 0)
                 {
                     MessageBox.Show("Невозможно построить с таким шагом, убедитесь что шаг больше 0", "Ошибка!",
                         MessageBoxButton.OK, MessageBoxImage.Error);
@@ -49,81 +50,82 @@ namespace laba3
             }
             catch (FormatException)
             {
-                MessageBox.Show("Вы ввели некорректные данные данные, убедитесь что поля ввода не пустые и не содержат только цифры.", "Ошибка!",
+                MessageBox.Show(
+                    "Вы ввели некорректные данные данные, убедитесь что поля ввода не пустые и не содержат только цифры.",
+                    "Ошибка!",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         /// <summary>
-        /// Функция для отрисовки графика
+        ///     Функция для отрисовки графика
         /// </summary>
         private void ExportToExcel(object sender, RoutedEventArgs e)
         {
             try
             {
-                this.Cursor = Cursors.Wait;
+                Cursor = Cursors.Wait;
                 _currentData.ExportToExcel();
-                this.Cursor = Cursors.Arrow;
+                Cursor = Cursors.Arrow;
             }
             catch (NullReferenceException)
             {
-                this.Cursor = Cursors.Arrow;
+                Cursor = Cursors.Arrow;
                 MessageBox.Show("Данные не проинициализированы", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-           
         }
 
         /// <summary>
-        /// Функция для получения начальных данных из файла
+        ///     Функция для получения начальных данных из файла
         /// </summary>
         private void ImportFromFile(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            var dlg = new OpenFileDialog();
             dlg.FileName = "Document"; // Default file name
             dlg.DefaultExt = ".txt"; // Default file extension
             dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
 
             // Show open file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
+            var result = dlg.ShowDialog();
 
             // Process open file dialog box results
             if (result == true)
-            {
                 try
                 {
                     var initialData = FileSystem.ReadFromFile(dlg.FileName);
                     if (initialData.Count > 4)
                     {
-                        MessageBox.Show("В файле найдены ненужные данные", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("В файле найдены ненужные данные", "Ошибка!", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
                     }
                     else if (initialData.Count < 4)
                     {
-                        MessageBox.Show("В файле недостаточно данных", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("В файле недостаточно данных", "Ошибка!", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
                     }
-                    else if (initialData[1]>=initialData[2])
+                    else if (initialData[1] >= initialData[2])
                     {
-                        MessageBox.Show("Левая граница должна быть меньше правой!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Левая граница должна быть меньше правой!", "Ошибка!", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
                     }
                     else
                     {
-                        _currentData= new LiveData(initialData[0], initialData[1], initialData[2], initialData[3]);
+                        _currentData = new LiveData(initialData[0], initialData[1], initialData[2], initialData[3]);
                         inputA.Text = _currentData.A.ToString();
                         inputX0.Text = _currentData.X0.ToString();
                         inputX1.Text = _currentData.X1.ToString();
                         inputStep.Text = _currentData.Step.ToString();
-
                     }
                 }
                 catch (FormatException)
                 {
-                    MessageBox.Show("В файле найдены некорректные данные", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("В файле найдены некорректные данные", "Ошибка!", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
                 }
-            }
-
         }
 
         /// <summary>
-        /// Выход из программы
+        ///     Выход из программы
         /// </summary>
         private void Exit(object sender, RoutedEventArgs e)
         {
@@ -132,31 +134,31 @@ namespace laba3
 
         private void ShowHelp(object sender, RoutedEventArgs e)
         {
-            HelpForm help = new HelpForm();
+            var help = new HelpForm();
             help.Owner = this;
             help.ShowDialog();
         }
 
         /// <summary>
-        /// Обновление графика в соответсвии с текущими данными
+        ///     Обновление графика в соответсвии с текущими данными
         /// </summary>
         /// <param name="liveData">Текущие данные</param>
         private void UpdateGraph(LiveData liveData)
         {
-            var model = new PlotModel { Title = "График функции a³/a²+x²" };
+            var model = new PlotModel {Title = "График функции a³/a²+x²"};
             model.LegendPosition = LegendPosition.RightBottom;
             model.LegendPlacement = LegendPlacement.Outside;
             model.LegendOrientation = LegendOrientation.Horizontal;
             model.Series.Add(liveData.Series);
 
-            var yAxis = new OxyPlot.Axes.LinearAxis();
-            var xAxis = new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Bottom };
+            var yAxis = new LinearAxis();
+            var xAxis = new LinearAxis {Position = AxisPosition.Bottom};
             xAxis.Title = "X";
             yAxis.Title = "a³/a²+x²";
             model.Axes.Add(yAxis);
             model.Axes.Add(xAxis);
             model.PlotType = PlotType.Cartesian;
-            this.Plot.Model = model;
+            Plot.Model = model;
         }
     }
 }
