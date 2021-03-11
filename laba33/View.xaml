@@ -9,41 +9,42 @@
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="MainWindow"
     Width="800"
-    Height="450"
+    Height="400"
     ResizeMode="CanMinimize"
     mc:Ignorable="d">
 
     <Grid
         Width="800"
-        Height="468"
+        Height="400"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top">
+        VerticalAlignment="Top" Margin="0,0,-6,0">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
+            <RowDefinition Height="20" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="221" />
-            <ColumnDefinition MaxWidth="0" IsEnabled="False" />
+            <ColumnDefinition  />
 
         </Grid.ColumnDefinitions>
         <Menu
-            Grid.ColumnSpan="1"
-            Height="25"
+            Grid.ColumnSpan="2"
+            Height="20"
             VerticalAlignment="Top">
-            <MenuItem Header="File">
+            <MenuItem Header="Файл">
                 <MenuItem Click="ImportFromFile" Header="Импорт начальных данных" />
                 <MenuItem Click="ExportToExcel" Header="Экспорт в Excel" />
                 <Separator />
                 <MenuItem Click="Exit" Header="Выход" />
             </MenuItem>
+            <MenuItem Click="ShowHelp" Header="Справка"></MenuItem>
         </Menu>
         <oxy:PlotView
             x:Name="Plot"
             Grid.Row="1"
             Grid.Column="1"
-            Margin="11,10,-567,58"
+            Margin="11,10,10,86"
             Model="{Binding MyModel}" />
         <Label
             x:Name="label1"

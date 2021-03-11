@@ -79,8 +79,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="FileSystem.cs" />
+    <Compile Include="HelpForm.xaml.cs">
+      <DependentUpon>HelpForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LiveData.cs" />
     <Compile Include="Model.cs" />
+    <Page Include="HelpForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

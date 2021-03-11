@@ -115,6 +115,13 @@ namespace laba3
             Application.Current.Shutdown();
         }
 
+        private void ShowHelp(object sender, RoutedEventArgs e)
+        {
+            HelpForm help = new HelpForm();
+            help.Owner = this;
+            help.ShowDialog();
+        }
+
         /// <summary>
         /// Обновление графика в соответсвии с текущими данными
         /// </summary>
