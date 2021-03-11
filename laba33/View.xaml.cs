@@ -24,18 +24,33 @@ namespace laba3
         /// </summary>
         private void DrawGraph(object sender, RoutedEventArgs e)
         {
-            double a = Double.Parse(inputA.Text);
-            double x0 = Double.Parse(inputX0.Text);
-            double x1 = Double.Parse(inputX1.Text);
-            double step = Double.Parse(inputStep.Text);
-            if (x0 >= x1)
+            try
             {
-                MessageBox.Show("Невозможно построить график в таком диапазоне значений", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                double a = Double.Parse(inputA.Text);
+                double x0 = Double.Parse(inputX0.Text);
+                double x1 = Double.Parse(inputX1.Text);
+                double step = Double.Parse(inputStep.Text);
+                if (step<=0)
+                {
+                    MessageBox.Show("Невозможно построить с таким шагом, убедитесь что шаг больше 0", "Ошибка!",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else if (x0 >= x1)
+                {
+                    MessageBox.Show("Невозможно построить график в таком диапазоне значений", "Ошибка!",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    _currentData = new LiveData(a, x0, x1, step);
+                    UpdateGraph(_currentData);
+                }
             }
-            else
+            catch (FormatException)
             {
-                _currentData = new LiveData(a,x0,x1,step);
-                UpdateGraph(_currentData);
+                MessageBox.Show("Вы ввели некорректные данные данные, убедитесь что поля ввода не пустые и не содержат только цифры.", "Ошибка!",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

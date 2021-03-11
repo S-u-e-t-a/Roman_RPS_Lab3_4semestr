@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FA41BF13-8414-4BA3-8155-38F7B5D3F41A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>laba33</RootNamespace>
-    <AssemblyName>laba33</AssemblyName>
+    <RootNamespace>laba3</RootNamespace>
+    <AssemblyName>laba3</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

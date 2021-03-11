@@ -16,8 +16,9 @@
     <Grid
         Width="800"
         Height="400"
+        Margin="0,0,-6,0"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top" Margin="0,0,-6,0">
+        VerticalAlignment="Top">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
@@ -25,7 +26,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="221" />
-            <ColumnDefinition  />
+            <ColumnDefinition />
 
         </Grid.ColumnDefinitions>
         <Menu
@@ -38,7 +39,7 @@
                 <Separator />
                 <MenuItem Click="Exit" Header="Выход" />
             </MenuItem>
-            <MenuItem Click="ShowHelp" Header="Справка"></MenuItem>
+            <MenuItem Click="ShowHelp" Header="Справка" />
         </Menu>
         <oxy:PlotView
             x:Name="Plot"
@@ -50,12 +51,12 @@
             x:Name="label1"
             Grid.Row="1"
             Grid.Column="0"
-            Width="58"
+            Width="107"
             Height="26"
             Margin="10,10,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Content="Функция"
+            Content="Функция a³/a²+x²"
             RenderTransformOrigin="0.605,0.5" />
         <Label
             Grid.Row="1"
