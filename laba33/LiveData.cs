@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Office.Interop.Excel;
+using OxyPlot;
 using OxyPlot.Series;
 
 namespace laba3
@@ -64,7 +65,30 @@ namespace laba3
             workSheet.Columns[4].AutoFit();
             workSheet.Columns[5].AutoFit();
             workSheet.Columns[6].AutoFit();
-            excelApp.Visible = true;
+
+            ChartObjects ChartObjects1 = (ChartObjects)workSheet.ChartObjects();
+            ChartObject chartObject1 = ChartObjects1.Add(150, 70, 400, 250);
+
+            
+            chartObject1.Chart.ChartWizard(workSheet.Range["A5", String.Format("B{0}",row.ToString())], XlChartType.xlXYScatterLinesNoMarkers, "New Chart");
+            chartObject1.Chart.SetSourceData(workSheet.Range["A5", String.Format("B{0}", row.ToString())]);
+            //todo убрать чартвизард и сделать все через нормальное задание графика
+          /*
+          ChartObject chartObject2 =
+              (ChartObject)workSheet.ChartObjects("NewChartObject");
+          chartObject2.Chart.PrintPreview(false);
+          */
+
+
+
+          excelApp.Visible = true;
         }
+
+        public string GetInitialData()
+        {
+            string data = A.ToString() +" "+ X0.ToString() + " " + X1.ToString() + " " + Step.ToString();
+            return data;
+        }
+
     }
 }

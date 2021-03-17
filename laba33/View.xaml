@@ -34,7 +34,8 @@
             Height="20"
             VerticalAlignment="Top">
             <MenuItem Header="Файл">
-                <MenuItem Click="ImportFromFile" Header="Импорт начальных данных" />
+                <MenuItem Click="ImportFromFile" Header="Открыть начальные данные" />
+                <MenuItem Click="SaveInitialData" Header="Сохранить начальные данные" />
                 <MenuItem Click="ExportToExcel" Header="Экспорт в Excel" />
                 <Separator />
                 <MenuItem Click="Exit" Header="Выход" />

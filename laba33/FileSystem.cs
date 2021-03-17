@@ -22,5 +22,17 @@ namespace laba3
                 .ToList(); // преобразуем результат в список
             return numbers;
         }
+
+        /// <summary>
+        /// Записывает переданный текст в файл
+        /// </summary>
+        /// <param name="path">Путь к файлу</param>
+        /// <param name="text">Текст для записи</param>
+        public static void SaveToFile(string path, string text)
+        {
+            var fileWriter = new StreamWriter(path);
+            fileWriter.WriteLine(text);
+            fileWriter.Close();
+        }
     }
 }

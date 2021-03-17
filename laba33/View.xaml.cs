@@ -4,7 +4,7 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using OxyPlot;
 using OxyPlot.Axes;
-
+using System.Configuration;
 namespace laba3
 {
     public partial class MainWindow
@@ -16,9 +16,16 @@ namespace laba3
         /// </summary>
         public MainWindow()
         {
+
             InitializeComponent();
             var myModel = new PlotModel();
             Plot.Model = myModel;
+            bool ShowHelpOnStart = bool.Parse(ConfigurationManager.AppSettings.Get("ShowHelpOnStart"));
+            if (ShowHelpOnStart)
+            {
+                var help = new HelpForm();
+                help.Show();
+            }
         }
 
         /// <summary>
@@ -58,7 +65,7 @@ namespace laba3
         }
 
         /// <summary>
-        ///     Функция для отрисовки графика
+        ///     Функция для эскпорта в Excel
         /// </summary>
         private void ExportToExcel(object sender, RoutedEventArgs e)
         {
@@ -125,6 +132,35 @@ namespace laba3
         }
 
         /// <summary>
+        /// Сохранение начальных данных
+        /// </summary>
+        private void SaveInitialData(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".txt"; // Default file extension
+            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            var result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                try
+                {
+                    FileSystem.SaveToFile(dlg.FileName, _currentData.GetInitialData());
+                }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("Данные не проинициализированы", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+               
+            }
+
+        }
+        
+        /// <summary>
         ///     Выход из программы
         /// </summary>
         private void Exit(object sender, RoutedEventArgs e)
@@ -132,6 +168,9 @@ namespace laba3
             Application.Current.Shutdown();
         }
 
+        /// <summary>
+        /// Вызов справки 
+        /// </summary>
         private void ShowHelp(object sender, RoutedEventArgs e)
         {
             var help = new HelpForm();
