@@ -15,8 +15,7 @@
 
     <Grid
         Width="800"
-        Height="400"
-        Margin="0,0,-6,0"
+        Height="371"
         HorizontalAlignment="Left"
         VerticalAlignment="Top">
 
@@ -46,7 +45,7 @@
             x:Name="Plot"
             Grid.Row="1"
             Grid.Column="1"
-            Margin="11,10,10,86"
+            Margin="11,10,10,37"
             Model="{Binding MyModel}" />
         <Label
             x:Name="label1"

@@ -18,8 +18,10 @@ namespace laba3
         {
 
             InitializeComponent();
-            var myModel = new PlotModel();
-            Plot.Model = myModel;
+
+            ClearGrapic();
+
+
             bool ShowHelpOnStart = bool.Parse(ConfigurationManager.AppSettings.Get("ShowHelpOnStart"));
             if (ShowHelpOnStart)
             {
@@ -43,11 +45,13 @@ namespace laba3
                 {
                     MessageBox.Show("Невозможно построить с таким шагом, убедитесь что шаг больше 0", "Ошибка!",
                         MessageBoxButton.OK, MessageBoxImage.Error);
+                    ClearGrapic();
                 }
                 else if (x0 >= x1)
                 {
                     MessageBox.Show("Невозможно построить график в таком диапазоне значений", "Ошибка!",
                         MessageBoxButton.OK, MessageBoxImage.Error);
+                    ClearGrapic();
                 }
                 else
                 {
@@ -61,6 +65,7 @@ namespace laba3
                     "Вы ввели некорректные данные данные, убедитесь что поля ввода не пустые и не содержат только цифры.",
                     "Ошибка!",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+                ClearGrapic();
             }
         }
 
@@ -80,6 +85,24 @@ namespace laba3
                 Cursor = Cursors.Arrow;
                 MessageBox.Show("Данные не проинициализированы", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+        private void ClearGrapic()
+        {
+            var model = new PlotModel { Title = "График функции a³/a²+x²" };
+            model.LegendPosition = LegendPosition.RightBottom;
+            model.LegendPlacement = LegendPlacement.Outside;
+            model.LegendOrientation = LegendOrientation.Horizontal;
+
+            var yAxis = new LinearAxis();
+            var xAxis = new LinearAxis { Position = AxisPosition.Bottom };
+            xAxis.Title = "X";
+            yAxis.Title = "a³/a²+x²";
+            model.Axes.Add(yAxis);
+            model.Axes.Add(xAxis);
+            model.PlotType = PlotType.Cartesian;
+            Plot.Model = model;
         }
 
         /// <summary>
@@ -104,16 +127,19 @@ namespace laba3
                     {
                         MessageBox.Show("В файле найдены ненужные данные", "Ошибка!", MessageBoxButton.OK,
                             MessageBoxImage.Error);
+                        ClearGrapic();
                     }
                     else if (initialData.Count < 4)
                     {
                         MessageBox.Show("В файле недостаточно данных", "Ошибка!", MessageBoxButton.OK,
                             MessageBoxImage.Error);
+                        ClearGrapic();
                     }
                     else if (initialData[1] >= initialData[2])
                     {
                         MessageBox.Show("Левая граница должна быть меньше правой!", "Ошибка!", MessageBoxButton.OK,
                             MessageBoxImage.Error);
+                        ClearGrapic();
                     }
                     else
                     {
@@ -128,6 +154,7 @@ namespace laba3
                 {
                     MessageBox.Show("В файле найдены некорректные данные", "Ошибка!", MessageBoxButton.OK,
                         MessageBoxImage.Error);
+                    ClearGrapic();
                 }
         }
 
