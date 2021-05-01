@@ -72,17 +72,7 @@ namespace laba3
             
             chartObject1.Chart.ChartWizard(workSheet.Range["A5", String.Format("B{0}",row.ToString())], XlChartType.xlXYScatterLinesNoMarkers, "New Chart");
             chartObject1.Chart.SetSourceData(workSheet.Range["A5", String.Format("B{0}", row.ToString())]);
-
-          //todo убрать чартвизард и сделать все через нормальное задание графика
-          /*
-          ChartObject chartObject2 =
-              (ChartObject)workSheet.ChartObjects("NewChartObject");
-          chartObject2.Chart.PrintPreview(false);
-          */
-
-
-
-          excelApp.Visible = true;
+            excelApp.Visible = true;
         }
 
         public string GetInitialData()

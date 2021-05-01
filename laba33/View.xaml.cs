@@ -5,6 +5,8 @@ using Microsoft.Win32;
 using OxyPlot;
 using OxyPlot.Axes;
 using System.Configuration;
+using System.Windows.Media;
+
 namespace laba3
 {
     public partial class MainWindow
@@ -21,15 +23,23 @@ namespace laba3
 
             ClearGrapic();
 
-
-            bool ShowHelpOnStart = bool.Parse(ConfigurationManager.AppSettings.Get("ShowHelpOnStart"));
+            /*
+            bool ShowHelpOnStart = Properties.Settings.Default.ShowHelpOnStart;
             if (ShowHelpOnStart)
             {
                 var help = new HelpForm();
                 help.Show();
-            }
+            }*/
         }
 
+        private void ShowHelpOnStart(object sender, RoutedEventArgs e)
+        {
+            bool ShowHelpOnStart = Properties.Settings.Default.ShowHelpOnStart;
+            if (ShowHelpOnStart)
+            {
+                ShowHelp(sender,e);
+            }
+        }
         /// <summary>
         ///     Функция отрисовки графика
         /// </summary>
@@ -87,7 +97,9 @@ namespace laba3
             }
         }
 
-
+        /// <summary>
+        /// Очищает график
+        /// </summary>
         private void ClearGrapic()
         {
             var model = new PlotModel { Title = "График функции a³/a²+x²" };
@@ -163,7 +175,7 @@ namespace laba3
         /// </summary>
         private void SaveInitialData(object sender, RoutedEventArgs e)
         {
-            var dlg = new OpenFileDialog();
+            var dlg = new SaveFileDialog();
             dlg.FileName = "Document"; // Default file name
             dlg.DefaultExt = ".txt"; // Default file extension
             dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
@@ -194,6 +206,13 @@ namespace laba3
         {
             Application.Current.Shutdown();
         }
+
+        private void ShowHelpOnStart_Changed(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
+
+
 
         /// <summary>
         /// Вызов справки 

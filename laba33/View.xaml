@@ -7,12 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:p="clr-namespace:laba3.Properties"
     Title="Лабораторная работа №3"
     Width="800"
     Height="400"
     ResizeMode="CanMinimize"
-    mc:Ignorable="d">
-
+    mc:Ignorable="d"
+    Loaded="ShowHelpOnStart"
+    >
+    
     <Grid
         Width="800"
         Height="371"
@@ -39,7 +42,16 @@
                 <Separator />
                 <MenuItem Click="Exit" Header="Выход" />
             </MenuItem>
-            <MenuItem Click="ShowHelp" Header="Справка" />
+            <MenuItem Header="Настройки" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="245">Запускать помощь при старте приложения</TextBlock>
+                    <CheckBox  IsChecked="{Binding ShowHelpOnStart, Mode=TwoWay, Source={x:Static p:Settings.Default}, UpdateSourceTrigger=PropertyChanged}" 
+                               Unchecked="ShowHelpOnStart_Changed"
+                               Checked="ShowHelpOnStart_Changed" RenderTransformOrigin="1.137,0.397"/>
+                </StackPanel>
+            </MenuItem>
+                <MenuItem Click="ShowHelp" Header="Справка" />
+            
         </Menu>
         <oxy:PlotView
             x:Name="Plot"

@@ -3,13 +3,13 @@ using OxyPlot.Series;
 
 namespace laba3
 {
-    internal class Model
+    public class Model
     {
         /// <summary>
         ///     Основная математичесская функция
         /// </summary>
         /// <returns>Результат расчетов</returns>
-        private static double Function(double x, double a)
+        public static double Function(double x, double a)
         {
             return a * a * a / (a * a + x * x);
         }
